@@ -485,6 +485,12 @@ $(function() {
 
 	});
 
+	var dteNow = new Date();
+	var intYear = dteNow.getFullYear();
+	console.log('Copyright © 2016 - ' + intYear + ' Recman Apps, Modules and Plugins');
+	$('#copyrightYear').text(intYear);
+
+
 	// $('#call_to_action').click(function(e) {
 	// 	e.preventDefault();
 	// 	fbq('track', 'InitiateCheckout');
