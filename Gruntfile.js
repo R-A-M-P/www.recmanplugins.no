@@ -446,7 +446,8 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: './files/',
                         src: [
-                            'img/**/*.*', // Could also use: `*.{gif,png,svg}`
+							'admin/**/*',
+                            'img/**/*', // Could also use: `*.{gif,png,svg}`
                             'js/**/*',
                             'frameworks/startup/common-files/**/*.*',
                             'frameworks/startup/flat-ui/dist/**/*.*',
@@ -471,6 +472,7 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: './files/',
                         src: [
+							'admin/**/*',
                             'img/**/*.*', // Could also use: `*.{gif,png,svg}`
                             'js/**/*.*',
                             'frameworks/startup/common-files/**/*.*',
@@ -490,8 +492,8 @@ module.exports = function(grunt) {
 
                         // COPY INDEX TO ROOT:
                         //src: '../build/prod/<%= pkg.version %>/<%= now %>/<%= ver %>/index.html',
-                        src: '../build/prod/index.html',
-                        dest: '../index.html'
+                        // src: '../build/prod/index.html',
+                        // dest: '../index.html'
 
                     }, {
 
@@ -543,6 +545,7 @@ module.exports = function(grunt) {
                 },
                 files: [ // Files to livereload on
                     '<%= jshint.init %>',
+                    './files/admin/**/*',
                     './files/js/**/*',
                     './files/styles/**/*',
                     './files/templates/**/*',
@@ -553,6 +556,7 @@ module.exports = function(grunt) {
             },
             files: [ // Files to livereload on
                 '<%= jshint.init %>',
+                './files/admin/**/*',
                 './files/js/**/*',
                 './files/styles/**/*',
                 './files/templates/**/*',
