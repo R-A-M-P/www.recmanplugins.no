@@ -8,7 +8,7 @@
  * @see http://codereview.stackexchange.com/questions/15166/best-way-to-organize-javascript-for-website
  */
 
-(function(exports) {
+(function (exports) {
 
 	'use strict';
 
@@ -16,7 +16,7 @@
 		registry = []; // Collection of module.
 
 	// Adds module to collection:
-	exports.register = function(moduleDeclaration) {
+	exports.register = function (moduleDeclaration) {
 
 		registry.push(moduleDeclaration); // Add module to registry.
 
@@ -30,7 +30,7 @@
 	};
 
 	// Executes every module:
-	exports.init = function() {
+	exports.init = function () {
 
 		initialized = true; // Flippin' switches!
 
@@ -45,7 +45,7 @@
 
 }(window.GHB = window.GHB || {})); // Use existing namespace or make a new object of that namespace.
 
-$(function() {
+$(function () {
 
 	window.Intercom('boot', {
 		app_id: 'uiel53cc',
@@ -54,7 +54,7 @@ $(function() {
 		}
 	});
 
-	$('.customer-support').on("click", function(event) {
+	$('.customer-support').on("click", function (event) {
 
 		event.preventDefault();
 
@@ -65,6 +65,10 @@ $(function() {
 		} else if ($(this).hasClass('copyright-violation')) {
 
 			Intercom('showNewMessage', 'Notice on Copyright Violation.\n\nYour message: ');
+
+		} else if ($(this).hasClass('sales-team')) {
+
+			Intercom('showNewMessage', 'Request for Custom Pricing Options\n\nYour message: ');
 
 		} else {
 
@@ -89,7 +93,7 @@ $(function() {
 
 	}
 
-	$(window).resize(function() {
+	$(window).resize(function () {
 
 		$('.section.one').css('height', (sH - $('header').outerHeight()) + 'px');
 		$('.section.two').css('height', (sH) + 'px');
@@ -112,7 +116,7 @@ $(function() {
 
 	});
 
-	$('.control, .control-btn').on('click', function() {
+	$('.control, .control-btn').on('click', function () {
 		$.scrollTo($(this).closest('.section').next(), {
 			axis: 'y',
 			duration: 500
@@ -127,7 +131,7 @@ $(function() {
 
 	// $('header .navbar a.seven').attr('href', 'https://help.recmanplugins.no/').attr('target', '_blank');
 
-	$('header .navbar a').on('click', function(event) {
+	$('header .navbar a').on('click', function (event) {
 
 		if (!$(this).hasClass('btn-default')) {
 
@@ -180,7 +184,7 @@ $(function() {
 
 		} else if ($(this).hasClass('seven')) {
 
-		window.open('https://help.recmanplugins.no/', '_blank');
+			window.open('https://help.recmanplugins.no/', '_blank');
 
 		} else if ($(this).hasClass('home')) {
 			window.location.href = "/";
@@ -190,8 +194,8 @@ $(function() {
 	});
 
 	// Add segments to a slider
-	$.fn.addSliderSegments = function() {
-		return this.each(function() {
+	$.fn.addSliderSegments = function () {
+		return this.each(function () {
 			var $this = $(this),
 				option = $this.slider('option'),
 				amount = (option.max - option.min) / option.step,
@@ -216,7 +220,7 @@ $(function() {
 	$.widget('ui.customspinner', $.ui.spinner, {
 
 		widgetEventPrefix: $.ui.spinner.prototype.widgetEventPrefix,
-		_buttonHtml: function() { // Remove arrows on the buttons
+		_buttonHtml: function () { // Remove arrows on the buttons
 
 			return '' +
 				'<a class="ui-spinner-button ui-spinner-up ui-corner-tr">' +
@@ -235,11 +239,11 @@ $(function() {
 		min: 1,
 		max: 999999
 
-	}).on('focus', function() {
+	}).on('focus', function () {
 
 		$(this).closest('.ui-spinner').addClass('focus');
 
-	}).on('blur', function() {
+	}).on('blur', function () {
 
 		$(this).closest('.ui-spinner').removeClass('focus');
 
@@ -389,7 +393,7 @@ $(function() {
 			value: slider_value,
 			orientation: 'horizontal',
 			range: 'min',
-			change: function(event, ui) {
+			change: function (event, ui) {
 
 				slider_value = $slider.slider('value');
 
@@ -405,7 +409,7 @@ $(function() {
 		});
 	}
 
-	$slider.on('slide', function(event, ui) {
+	$slider.on('slide', function (event, ui) {
 
 		var slider_value = $slider.slider('value');
 
@@ -420,7 +424,7 @@ $(function() {
 	});
 
 
-	$('#spinner-employees').on('spinchange', function(event, ui) {
+	$('#spinner-employees').on('spinchange', function (event, ui) {
 
 		customspinner_value = $('#spinner-employees').customspinner('value');
 
@@ -435,7 +439,7 @@ $(function() {
 	});
 
 
-	$('#spinner-employees').change(function() {
+	$('#spinner-employees').change(function () {
 
 		customspinner_value = $('#spinner-employees').customspinner('value');
 
@@ -449,7 +453,7 @@ $(function() {
 
 	});
 
-	$('#spinner-employees').on('spinstop', function(event, ui) {
+	$('#spinner-employees').on('spinstop', function (event, ui) {
 
 		customspinner_value = $('#spinner-employees').customspinner('value');
 
@@ -464,7 +468,7 @@ $(function() {
 	});
 
 	// Show ToS Modal
-	$('.terms-of-service').on("click", function(event) {
+	$('.terms-of-service').on("click", function (event) {
 
 		event.preventDefault();
 
@@ -472,14 +476,14 @@ $(function() {
 
 	});
 
-	$('.call-to-action').on('click', function(e) {
+	$('.call-to-action').on('click', function (e) {
 
 		e.preventDefault();
 
 		fbq('trackCustom', 'ButtonClickSignUp');
 		console.log("Redirecting to Setup Page");
 
-		setTimeout(function() {
+		setTimeout(function () {
 			location.href = 'https://setup.recmanplugins.no/';
 		}, 500);
 
