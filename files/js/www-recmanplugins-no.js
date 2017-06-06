@@ -259,7 +259,7 @@ $(function () {
 
 	var recman_coworkers;
 
-	var licence_per_month = 310;
+	var licence_per_month = 300;
 	var price_per_user = 0;
 	var total_price_per_month = 0;
 	var subscription_plan = '';
@@ -268,33 +268,47 @@ $(function () {
 	var tier_two = 0;
 	var tier_three = 0;
 	var tier_four = 0;
+	var tier_five = 0;
 
-	var tier_one_price_per_user = 89;
-	var tier_two_price_per_user = 79;
-	var tier_three_price_per_user = 69;
-	var tier_four_price_per_user = 59;
+	var tier_one_price_per_user = 99;
+	var tier_two_price_per_user = 89;
+	var tier_three_price_per_user = 79;
+	var tier_four_price_per_user = 69;
+	var tier_five_price_per_user = 59;
+
+	var tier_one_max_user = 4;
+	var tier_two_max_user = 20;
+	var tier_three_max_user = 25;
+	var tier_four_max_user = 50;
+	var tier_five_max_user = 51;
 
 	var total_price_per_month_per_user;
 
 	function calculate_monthly_cost() {
 
-		if (recman_coworkers >= 0 && recman_coworkers <= 1) {
-			subscription_plan = 'Essential';
+		if (recman_coworkers >= 1 && recman_coworkers <= 4) {
+			subscription_plan = 'Solo';
 			//console.log(subscription_plan);
-		} else if (recman_coworkers >= 2 && recman_coworkers <= 5) {
+		} else if (recman_coworkers >= 5 && recman_coworkers <= 24) {
 			subscription_plan = 'Team';
 			//console.log(subscription_plan);
-		} else if (recman_coworkers >= 6 && recman_coworkers <= 25) {
-			subscription_plan = 'Professional';
+		} else if (recman_coworkers >= 25 && recman_coworkers <= 99) {
+			subscription_plan = 'Organization';
 			//console.log(subscription_plan);
-		} else if (recman_coworkers >= 26) {
-			subscription_plan = 'Enterprise';
+		} else if (recman_coworkers >= 50 && recman_coworkers <= 99) {
+			subscription_plan = 'Enterprise 50';
+			//console.log(subscription_plan);
+		} else if (recman_coworkers >= 100 && recman_coworkers <= 149) {
+			subscription_plan = 'Enterprise 100';
+			//console.log(subscription_plan);
+		} else if (recman_coworkers > 150) {
+			subscription_plan = 'Dedicated';
 			//console.log(subscription_plan);
 		}
 
-		if (recman_coworkers >= 0 && recman_coworkers <= 1) {
+		if (recman_coworkers >= 1 && recman_coworkers <= 4) {
 
-			tier_one = (1 * tier_one_price_per_user);
+			tier_one = (recman_coworkers * tier_one_price_per_user);
 
 			total_price_per_month = licence_per_month + tier_one;
 
@@ -302,14 +316,12 @@ $(function () {
 
 			console.log(total_price_per_month);
 
-		}
+		} else if (recman_coworkers >= 5 && recman_coworkers <= 24) {
 
-		if (recman_coworkers >= 2 && recman_coworkers <= 5) {
-
-			tier_one = (1 * tier_one_price_per_user) + licence_per_month;
+			tier_one = (tier_one_max_user * tier_one_price_per_user) + licence_per_month;
 			//console.log(tier_one);
 
-			tier_two = ((recman_coworkers - 1) * tier_two_price_per_user);
+			tier_two = ((recman_coworkers - tier_one_max_user) * tier_two_price_per_user);
 			//console.log(tier_two);
 
 			total_price_per_month = tier_one + tier_two;
@@ -318,17 +330,15 @@ $(function () {
 
 			console.log(total_price_per_month);
 
-		}
+		} else if (recman_coworkers >= 25 && recman_coworkers <= 49) {
 
-		if (recman_coworkers >= 6 && recman_coworkers <= 25) {
-
-			tier_one = (1 * tier_one_price_per_user) + licence_per_month;
+			tier_one = (tier_one_max_user * tier_one_price_per_user) + licence_per_month;
 			//console.log(tier_one);
 
-			tier_two = ((5 - 1) * tier_two_price_per_user);
+			tier_two = tier_two_max_user * tier_two_price_per_user;
 			//console.log(tier_two);
 
-			tier_three = ((recman_coworkers - 5) * tier_three_price_per_user);
+			tier_three = (recman_coworkers - (tier_one_max_user + tier_two_max_user)) * tier_three_price_per_user;
 			//console.log(tier_three);
 
 			total_price_per_month = tier_one + tier_two + tier_three;
@@ -337,39 +347,67 @@ $(function () {
 
 			console.log(total_price_per_month);
 
-		}
+		} else if (recman_coworkers >= 50  && recman_coworkers <= 99) {
 
-		if (recman_coworkers >= 26) {
-
-			tier_one = (1 * tier_one_price_per_user) + licence_per_month;
+			tier_one = (tier_one_max_user * tier_one_price_per_user) + licence_per_month;
 			//console.log(tier_one);
 
-			tier_two = ((5 - 1) * tier_two_price_per_user);
+			tier_two = tier_two_max_user * tier_two_price_per_user;
 			//console.log(tier_two);
 
-			tier_three = ((25 - 5) * tier_three_price_per_user);
+			tier_three = tier_three_max_user * tier_three_price_per_user;
 			//console.log(tier_three);
 
-			tier_four = ((recman_coworkers - 25) * tier_four_price_per_user);
+			tier_four = (recman_coworkers - (tier_one_max_user + tier_two_max_user + tier_three_max_user)) * tier_four_price_per_user;
 			//console.log(tier_four);
 
 			total_price_per_month = tier_one + tier_two + tier_three + tier_four;
 
-			if (total_price_per_month <= 3999) {
-				total_price_per_month = total_price_per_month;
+			total_price_per_month_per_user = total_price_per_month / recman_coworkers;
 
-				total_price_per_month_per_user = total_price_per_month / recman_coworkers;
+			console.log(total_price_per_month);
 
-				console.log(total_price_per_month);
+			// if (total_price_per_month <= 3999) {
+			// 	total_price_per_month = total_price_per_month;
+			//
+			// 	total_price_per_month_per_user = total_price_per_month / recman_coworkers;
+			//
+			// 	console.log(total_price_per_month);
+			//
+			// } else {
+			// 	total_price_per_month = 3999;
+			//
+			// 	total_price_per_month_per_user = 69;
+			//
+			// 	console.log(total_price_per_month);
+			//
+			// }
+		} else if (recman_coworkers >= 100  && recman_coworkers <= 150) {
 
-			} else {
-				total_price_per_month = 3999;
+			tier_one = (tier_one_max_user * tier_one_price_per_user) + licence_per_month;
+			//console.log(tier_one);
 
-				total_price_per_month_per_user = 69;
+			tier_two = tier_two_max_user * tier_two_price_per_user;
+			//console.log(tier_two);
 
-				console.log(total_price_per_month);
+			tier_three = tier_three_max_user * tier_three_price_per_user;
+			//console.log(tier_three);
 
-			}
+			tier_four = tier_four_max_user * tier_four_price_per_user;
+			//console.log(tier_four);
+
+			tier_five = (recman_coworkers - (tier_one_max_user + tier_two_max_user + tier_three_max_user + tier_four_max_user)) * tier_five_price_per_user;
+			//console.log(tier_four);
+
+			total_price_per_month = tier_one + tier_two + tier_three + tier_four + tier_five;
+
+			total_price_per_month_per_user = total_price_per_month / recman_coworkers;
+
+			console.log(total_price_per_month);
+
+		} else if (recman_coworkers > 150) {
+
+			console.log('More than 150 users, time to discuss custom pricing options...');
 		}
 
 		total_price_per_month = accounting.formatMoney(total_price_per_month, "", 0, " ", ""); // 4 999
@@ -388,7 +426,7 @@ $(function () {
 	if ($slider.length > 0) {
 		$slider.slider({
 			min: 1,
-			max: 100,
+			max: 150,
 			step: 1,
 			value: slider_value,
 			orientation: 'horizontal',
