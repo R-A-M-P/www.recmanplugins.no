@@ -1,5 +1,7 @@
 # Source for Recmanplugins.no
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/R-A-M-P/www.recmanplugins.no.svg)](https://greenkeeper.io/)
+
 ## Get started
 
 ### Install
